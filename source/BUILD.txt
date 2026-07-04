@@ -1,0 +1,16 @@
+Rebuilding WaTTrack.exe from source
+=====================================
+This is the complete source for the native launcher (a small static
+file server -- see the comment at the top of server.c for why it
+doesn't need a backend at all).
+
+On Ubuntu/Debian with mingw-w64 installed:
+
+    sudo apt-get install mingw-w64
+    x86_64-w64-mingw32-windres app.rc -O coff -o app_res.o
+    x86_64-w64-mingw32-gcc -O2 server.c app_res.o -o WaTTrack.exe \
+        -lws2_32 -lshell32 -static -static-libgcc
+
+Then place the resulting WaTTrack.exe next to the "dist" folder
+(the built frontend -- run "npm install && npx vite build" in the
+original project to regenerate it).
